@@ -26,20 +26,20 @@ substring(a.data from 9 for 2) ||'/'|| substring(a.data from 6 for 2) ||'/'|| su
 coalesce(a.OBSERVACAO, '') ||'|'||
 '$CodFornecedor$' ||'|'||
 '$Cnpj$' ||'|'||
-'CodPessoa' ||'|'||
-'CodLocal' ||'|'||
-'NrInterno' ||'|'||
+'$CodPessoa$' ||'|'||
+'$CodLocal$' ||'|'||
+'$NrInterno$' ||'|'||
 1  ||'|'||
-'CodEntidadeLiquidacao' ||'|'||
-'ExercicioLiquidacao' ||'|'||
-'NrLiquidacao' ||'|'||
-'ExLiquidacao' ||'|'||
-'CodEntidadeOrigemLiquidacao' ||'|'||
-'CodEntidadeEmpenho' ||'|'||
-'ExercicioEmpenho' ||'|'||
-'NrEmpenho' ||'|'||
-'ExEmpenho' ||'|'||
-'CodEntidadeOrigemEmpenho' ||'|'
+'$CodEntidadeLiquidacao$' ||'|'||
+'$ExercicioLiquidacao$' ||'|'||
+'$NrLiquidacao$' ||'|'||
+'$ExLiquidacao$' ||'|'||
+'$CodEntidadeOrigemLiquidacao$' ||'|'||
+'$CodEntidadeEmpenho$' ||'|'||
+'$ExercicioEmpenho$' ||'|'||
+'$NrEmpenho$' ||'|'||
+'$ExEmpenho$' ||'|'||
+'$CodEntidadeOrigemEmpenho$' ||'|'
 FROM FROMOVC a 
 left join FROVEIC v on (v.IDFROTA = a.IDFROTA)
 join FROROTC r on (r.CODIGO = a.CODROTEIRO)
