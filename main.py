@@ -41,7 +41,9 @@ def start():
 
             CodProduto_Nome = dado[6].replace(':', '|').replace(' ','').strip()
             NrCodigoMotorista = dados_veiculo[0]
-            VlUnitario = round(float(str(result_1[0][0]).split('|')[3].replace('.', '').replace(',', '.').replace('R$ ', '')) / float(str(result_1[0][0]).split('|')[2].replace('.', '').replace(',', '.').replace('R$ ', '')),4)  # valor unitario
+            try:
+                VlUnitario = round(float(str(result_1[0][0]).split('|')[3].replace('.', '').replace(',', '.').replace('R$ ', '')) / float(str(result_1[0][0]).split('|')[2].replace('.', '').replace(',', '.').replace('R$ ', '')),4)  # valor unitario
+            except: VlUnitario = '$0,00$'
             NrLitrosAbastecimento = dado[2].replace(',', '.')
             VlAbastecimento = dado[3].replace(',', '.')
             NrNotaFiscal = dado[0]
