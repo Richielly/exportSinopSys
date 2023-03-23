@@ -29,7 +29,10 @@ def start():
         #Layout coluna dados --> posição 1= num nota fiscal      2 = km atual    3 = qtde litros    4 = valor    5 = cod fornecedor     6 = razão social fornecedor   7 = tipo combustivel
 
         for inf in result:
-            sequencia = str(inf[0]).split('|')[1]
+            if comando == 'Abastecimento':
+                sequencia = str(inf[0]).split('|')[1]
+            else:
+                sequencia = str(inf[0]).split('|')[5]
             cur.execute(f'select a.dados, a.dadosveiculo, a.sequencia from fromovc a where a.TIPO = 6 and a.sequencia = {sequencia}')
             result_1 = cur.fetchall()
 
@@ -43,6 +46,11 @@ def start():
             VlAbastecimento = dado[3].replace(',', '.')
             NrNotaFiscal = dado[0]
             CodFornecedor = dado[4]
+
+            if dado[1] == '':
+                VlAcumulador = '0'
+            else:
+                VlAcumulador = dado[1]
 
             try:
                 if CodFornecedor == '0':
@@ -81,6 +89,8 @@ def start():
                             '$NrEmpenho$', '').replace(
                             '$ExEmpenho$', '').replace(
                             '$CodEntidadeOrigemEmpenho$', '').replace(
+                            '$VlAcumulador$', VlAcumulador).replace(
+                            '$TmpVlAcumulador$', VlAcumulador).replace(
                             'b''', '').replace(
                             "'", '')
                              + '\n')

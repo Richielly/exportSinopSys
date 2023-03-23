@@ -44,5 +44,19 @@ FROM FROMOVC a
 left join FROVEIC v on (v.IDFROTA = a.IDFROTA)
 join FROROTC r on (r.CODIGO = a.CODROTEIRO)
 where a.TIPO = 6
-order by a.SEQUENCIA desc """
+order by a.SEQUENCIA desc """,
+
+'Acumulador' : f""" SELECT 
+{codEntidade} ||'|'||
+coalesce(v.CODIGO,'') ||'|'||
+coalesce(v.NUMTOMBAMENTO,'') ||'|'||
+substring(a.DATA from 9 for 2) ||'/'|| substring(a.DATA from 6 for 2) ||'/'|| substring(a.DATA from 1 for 4) ||' '||'00:00:' || lpad(substring(LPAD(a.SEQUENCIA,6,'0') from 6 for 1), 2, '0') ||'|'||
+2 ||'|'||  --2 - Abastecimento
+a.SEQUENCIA ||'|'||
+'$VlAcumulador$' ||'|'||
+'$TmpVlAcumulador$' ||'|'
+FROM FROMOVC a 
+left join FROVEIC v on (v.IDFROTA = a.IDFROTA)
+where a.TIPO = 6
+order by a.SEQUENCIA asc """
 }
