@@ -9,137 +9,137 @@ motorista = cfg['DEFAULT']['Motorista']
 
 scripts = {
 
-# 'Cor' : f""" select DISTINCT
-#             UPPER(c.COR) ||'|' FROM FROVEIC c
-#             union all
-#             select distinct
-#             'CONVERSAO' from FROVEIC """,
+'Cor' : f""" select DISTINCT
+            UPPER(c.COR) ||'|' FROM FROVEIC c
+            union all
+            select distinct
+            'CONVERSAO|' from FROVEIC """,
 
-# 'Marca' : f""" SELECT distinct upper(m.fabricante) ||'|' FROM FROVEIC m """,
+'Marca' : f""" SELECT distinct upper(m.fabricante) ||'|' FROM FROVEIC m """,
 
-# 'Especie' : f""" SELECT distinct
-#                 trim(case e.TIPONATUREZA
-#                     when '1  : Veiculos Passeio/Utilitario' then 'Veiculos Passeio/Utilitario'
-#                     when '1:Veiculos Passeio/Utilitario' then 'Veiculos Passeio/Utilitario'
-#                     when '5  : Motos' then 'Motos'
-#                     when '5:Motos' then 'Motos'
-#                     when '52 : Tratores Agricolas' then 'Tratores Agricolas'
-#                     when '52:Tratores Agricolas' then 'Tratores Agricolas'
-#                     when '99:Outros Equipamentos' then 'Outros Equipamentos' end) ||'|'||
-#                 case e.TIPONATUREZA
-#                     when '1  : Veiculos Passeio/Utilitario' then 'B'
-#                     when '1:Veiculos Passeio/Utilitario' then 'B'
-#                     when '5  : Motos' then 'A'
-#                     when '5:Motos' then 'A'
-#                     when '52 : Tratores Agricolas' then 'D'
-#                     when '52:Tratores Agricolas' then 'D'
-#                     when '99:Outros Equipamentos' then 'E' end||'|'||
-#                 e.TIPOMEDIDOR ||'|'||
-#                 '' ||'|'||
-#                 trim(case e.TIPONATUREZA
-#                     when '1  : Veiculos Passeio/Utilitario' then '1'
-#                     when '1:Veiculos Passeio/Utilitario' then '1'
-#                     when '5  : Motos' then '5'
-#                     when '5:Motos' then '5'
-#                     when '52 : Tratores Agricolas' then '52'
-#                     when '52:Tratores Agricolas' then '52'
-#                     when '99:Outros Equipamentos' then '99' end) ||'|'
-#                 FROM FROVEIC e """,
+'Especie' : f""" SELECT distinct
+                trim(case e.TIPONATUREZA
+                    when '1  : Veiculos Passeio/Utilitario' then 'Veiculos Passeio/Utilitario'
+                    when '1:Veiculos Passeio/Utilitario' then 'Veiculos Passeio/Utilitario'
+                    when '5  : Motos' then 'Motos'
+                    when '5:Motos' then 'Motos'
+                    when '52 : Tratores Agricolas' then 'Tratores Agricolas'
+                    when '52:Tratores Agricolas' then 'Tratores Agricolas'
+                    when '99:Outros Equipamentos' then 'Outros Equipamentos' end) ||'|'||
+                case e.TIPONATUREZA
+                    when '1  : Veiculos Passeio/Utilitario' then 'B'
+                    when '1:Veiculos Passeio/Utilitario' then 'B'
+                    when '5  : Motos' then 'A'
+                    when '5:Motos' then 'A'
+                    when '52 : Tratores Agricolas' then 'D'
+                    when '52:Tratores Agricolas' then 'D'
+                    when '99:Outros Equipamentos' then 'E' end||'|'||
+                e.TIPOMEDIDOR ||'|'||
+                '' ||'|'||
+                trim(case e.TIPONATUREZA
+                    when '1  : Veiculos Passeio/Utilitario' then '1'
+                    when '1:Veiculos Passeio/Utilitario' then '1'
+                    when '5  : Motos' then '5'
+                    when '5:Motos' then '5'
+                    when '52 : Tratores Agricolas' then '52'
+                    when '52:Tratores Agricolas' then '52'
+                    when '99:Outros Equipamentos' then '99' end) ||'|'
+                FROM FROVEIC e """,
 
-# 'Modelo' : f""" select
-#                 m.MODELO ||'|'||
-#                 upper(m.FABRICANTE) ||'|'||
-#                 trim(case m.TIPONATUREZA
-#                     when '1  : Veiculos Passeio/Utilitario' then 'Veiculos Passeio/Utilitario'
-#                     when '1:Veiculos Passeio/Utilitario' then 'Veiculos Passeio/Utilitario'
-#                     when '5  : Motos' then 'Motos'
-#                     when '5:Motos' then 'Motos'
-#                     when '52 : Tratores Agricolas' then 'Tratores Agricolas'
-#                     when '52:Tratores Agricolas' then 'Tratores Agricolas'
-#                     when '99:Outros Equipamentos' then 'Outros Equipamentos' end) ||'|'||
-#                 trim(case m.DESCCOMBUSTIVEL
-#                     when '1:Gasolina' then '1'
-#                     when '3:Diesel' then '3'
-#                     when '26:Veículos FLEX e Assemelhado' then '26' end) ||'|'
-#                 FROM FROVEIC m """,
+'Modelo' : f""" select
+                m.MODELO ||'|'||
+                upper(m.FABRICANTE) ||'|'||
+                trim(case m.TIPONATUREZA
+                    when '1  : Veiculos Passeio/Utilitario' then 'Veiculos Passeio/Utilitario'
+                    when '1:Veiculos Passeio/Utilitario' then 'Veiculos Passeio/Utilitario'
+                    when '5  : Motos' then 'Motos'
+                    when '5:Motos' then 'Motos'
+                    when '52 : Tratores Agricolas' then 'Tratores Agricolas'
+                    when '52:Tratores Agricolas' then 'Tratores Agricolas'
+                    when '99:Outros Equipamentos' then 'Outros Equipamentos' end) ||'|'||
+                trim(case m.DESCCOMBUSTIVEL
+                    when '1:Gasolina' then '1'
+                    when '3:Diesel' then '3'
+                    when '26:Veículos FLEX e Assemelhado' then '26' end) ||'|'
+                FROM FROVEIC m """,
 
-# 'Motorista' : f""" SELECT
-#                 {codEntidade} ||'|'||
-#                 coalesce(m.CODIGO, '') ||'|'||
-#                 '' ||'|'||
-#                 '' ||'|'||
-#                 replace(replace(m.cpf,'.',''),'-','') ||'|'||
-#                 coalesce(m.cnh, '') ||'|'||
-#                 1 ||'|'|| --Padrão 1-Com Foto
-#                 substring(m.DATAEMISSAOCNH from 9 for 2) ||'/'|| substring(m.DATAEMISSAOCNH from 6 for 2) ||'/'|| substring(m.DATAEMISSAOCNH from 1 for 4) ||'|'||
-#                 substring(m.DATAVALIDADECNH from 9 for 2) ||'/'|| substring(m.DATAVALIDADECNH from 6 for 2) ||'/'|| substring(m.DATAVALIDADECNH from 1 for 4) ||'|'||
-#                 substring(m.DATAEMISSAOCNH from 9 for 2) ||'/'|| substring(m.DATAEMISSAOCNH from 6 for 2) ||'/'|| substring(m.DATAEMISSAOCNH from 1 for 4) ||'|'
-#                 FROM FROMOTC m """,
+'Motorista' : f""" SELECT
+                {codEntidade} ||'|'||
+                coalesce(m.CODIGO, '') ||'|'||
+                '' ||'|'||
+                '' ||'|'||
+                replace(replace(m.cpf,'.',''),'-','') ||'|'||
+                coalesce(m.cnh, '') ||'|'||
+                1 ||'|'|| --Padrão 1-Com Foto
+                substring(m.DATAEMISSAOCNH from 9 for 2) ||'/'|| substring(m.DATAEMISSAOCNH from 6 for 2) ||'/'|| substring(m.DATAEMISSAOCNH from 1 for 4) ||'|'||
+                substring(m.DATAVALIDADECNH from 9 for 2) ||'/'|| substring(m.DATAVALIDADECNH from 6 for 2) ||'/'|| substring(m.DATAVALIDADECNH from 1 for 4) ||'|'||
+                substring(m.DATAEMISSAOCNH from 9 for 2) ||'/'|| substring(m.DATAEMISSAOCNH from 6 for 2) ||'/'|| substring(m.DATAEMISSAOCNH from 1 for 4) ||'|'
+                FROM FROMOTC m """,
 
-# 'MotoristaCategoriaCnh' : f""" SELECT
-#                             distinct
-#                             {codEntidade} ||'|'||
-#                             m.codigo ||'|'||
-#                                 case r.IDFROTA
-#                                 when 1 then 'B'
-#                                 when 2 then 'A'
-#                                 when 3 then 'A'
-#                                 when 4 then 'A' else 'A' end ||'|'
-#                             FROM FROMOTC m
-#                                 left join FROROTC r on (r.MOTORISTA = m.CODIGO) """,
+'MotoristaCategoriaCnh' : f""" SELECT
+                            distinct
+                            {codEntidade} ||'|'||
+                            m.codigo ||'|'||
+                                case r.IDFROTA
+                                when 1 then 'B'
+                                when 2 then 'A'
+                                when 3 then 'A'
+                                when 4 then 'A' else 'A' end ||'|'
+                            FROM FROMOTC m
+                                left join FROROTC r on (r.MOTORISTA = m.CODIGO) """,
 
-# 'MotoristaSituacaoCnh' : f""" SELECT
-#             distinct
-#             {codEntidade} ||'|'||
-#             m.codigo ||'|'||
-#             substring(current_date from 9 for 2) ||'/'|| substring(current_date from 6 for 2) ||'/'|| substring(current_date from 1 for 4) ||'|'||
-#             1 ||'|'|| -- 1=Normal
-#             0 ||'|'
-#             FROM FROMOTC m """,
+'MotoristaSituacaoCnh' : f""" SELECT
+            distinct
+            {codEntidade} ||'|'||
+            m.codigo ||'|'||
+            substring(current_date from 9 for 2) ||'/'|| substring(current_date from 6 for 2) ||'/'|| substring(current_date from 1 for 4) ||'|'||
+            1 ||'|'|| -- 1=Normal
+            0 ||'|'
+            FROM FROMOTC m """,
 
-# 'Veiculo' : f""" SELECT
-#             {codEntidade} ||'|'||
-#             v.CODIGO ||'|'||
-#             v.NUMTOMBAMENTO ||'|'||
-#             v.PLACA ||'|'||
-#             trim(case v.TIPONATUREZA
-#                 when '1  : Veiculos Passeio/Utilitario' then 'Veiculos Passeio/Utilitario'
-#                 when '1:Veiculos Passeio/Utilitario' then 'Veiculos Passeio/Utilitario'
-#                 when '5  : Motos' then 'Motos'
-#                 when '5:Motos' then 'Motos'
-#                 when '52 : Tratores Agricolas' then 'Tratores Agricolas'
-#                 when '52:Tratores Agricolas' then 'Tratores Agricolas'
-#                 when '99:Outros Equipamentos' then 'Outros Equipamentos' end) ||'|'||
-#             v.MODELO ||'|'||
-#             v.cor ||'|'||
-#             v.RENAVAM ||'|'||
-#             v.CHASSI ||'|'||
-#             v.MOTOR ||'|'||
-#             v.ANOFABRICACAO ||'|'||
-#             v.ANOMODELO ||'|'||
-#             case v.TIPONATUREZA
-#                 when '1  : Veiculos Passeio/Utilitario' then '1'
-#                 when '1:Veiculos Passeio/Utilitario' then '1'
-#                 when '5  : Motos' then '5'
-#                 when '5:Motos' then '5'
-#                 when '52 : Tratores Agricolas' then '52'
-#                 when '52:Tratores Agricolas' then '52'
-#                 when '99:Outros Equipamentos' then '99' end ||'|'||
-#             '' ||'|'||
-#             1 ||'|'|| -- 1=Sim
-#             case v.TIPOVINCULO
-#                 when '1:PRÓPRIO' then '1'
-#                 when '2:CEDIDO' then '2'
-#                 when '1 : PRÓPRIO' then '1'
-#                 when '2 : CEDIDO' then '2' end ||'|'||
-#             v.COMBUSTIVEL ||'|'||
-#             substring(v.DATACAD from 9 for 2) ||'/'|| substring(v.DATACAD from 6 for 2) ||'/'|| substring(v.DATACAD from 1 for 4) ||'|'||
-#             '1' ||'|'||--obrigatorio
-#             '1' ||'|'|| --obrigatorio
-#             '1' ||'|'|| --obrigatorio
-#             2 ||'|'||
-#             '' ||'|'
-#             FROM FROVEIC v """,
+'Veiculo' : f""" SELECT
+            {codEntidade} ||'|'||
+            v.CODIGO ||'|'||
+            v.NUMTOMBAMENTO ||'|'||
+            v.PLACA ||'|'||
+            trim(case v.TIPONATUREZA
+                when '1  : Veiculos Passeio/Utilitario' then 'Veiculos Passeio/Utilitario'
+                when '1:Veiculos Passeio/Utilitario' then 'Veiculos Passeio/Utilitario'
+                when '5  : Motos' then 'Motos'
+                when '5:Motos' then 'Motos'
+                when '52 : Tratores Agricolas' then 'Tratores Agricolas'
+                when '52:Tratores Agricolas' then 'Tratores Agricolas'
+                when '99:Outros Equipamentos' then 'Outros Equipamentos' end) ||'|'||
+            v.MODELO ||'|'||
+            v.cor ||'|'||
+            v.RENAVAM ||'|'||
+            v.CHASSI ||'|'||
+            v.MOTOR ||'|'||
+            v.ANOFABRICACAO ||'|'||
+            v.ANOMODELO ||'|'||
+            case v.TIPONATUREZA
+                when '1  : Veiculos Passeio/Utilitario' then '1'
+                when '1:Veiculos Passeio/Utilitario' then '1'
+                when '5  : Motos' then '5'
+                when '5:Motos' then '5'
+                when '52 : Tratores Agricolas' then '52'
+                when '52:Tratores Agricolas' then '52'
+                when '99:Outros Equipamentos' then '99' end ||'|'||
+            '' ||'|'||
+            1 ||'|'|| -- 1=Sim
+            case v.TIPOVINCULO
+                when '1:PRÓPRIO' then '1'
+                when '2:CEDIDO' then '2'
+                when '1 : PRÓPRIO' then '1'
+                when '2 : CEDIDO' then '2' end ||'|'||
+            v.COMBUSTIVEL ||'|'||
+            substring(v.DATACAD from 9 for 2) ||'/'|| substring(v.DATACAD from 6 for 2) ||'/'|| substring(v.DATACAD from 1 for 4) ||'|'||
+            '1' ||'|'||--obrigatorio
+            '1' ||'|'|| --obrigatorio
+            '1' ||'|'|| --obrigatorio
+            2 ||'|'||
+            '' ||'|'
+            FROM FROVEIC v """,
 
 'Abastecimento' : f""" SELECT 
 {codEntidade} ||'|'||
