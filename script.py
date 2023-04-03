@@ -142,53 +142,74 @@ scripts = {
             FROM FROVEIC v """,
 
 'Abastecimento' : f""" SELECT 
-{codEntidade} ||'|'||
-a.SEQUENCIA ||'|'||
-coalesce(v.CODIGO,'') ||'|'||
-coalesce(v.NUMTOMBAMENTO,'') ||'|'||
-'$CodProduto$' ||'|'||
-'$Nome$' ||'|'||
-'$NrCodigoMotorista$' ||'|'||
-'$VlUnitario$' ||'|'||
-substring(a.data from 9 for 2) ||'/'|| substring(a.data from 6 for 2) ||'/'|| substring(a.data from 1 for 4) ||'|'||
-'$NrLitrosAbastecimento$' ||'|'||
-'$VlAbastecimento$' ||'|'||
-'1' ||'|'||
-'$NrNotaFiscal$' ||'|'||
-coalesce(a.OBSERVACAO, '') ||'|'||
-'$CodFornecedor$' ||'|'||
-'$Cnpj$' ||'|'||
-'$CodPessoa$' ||'|'||
-'$CodLocal$' ||'|'||
-'$NrInterno$' ||'|'||
-1  ||'|'||
-'$CodEntidadeLiquidacao$' ||'|'||
-'$ExercicioLiquidacao$' ||'|'||
-'$NrLiquidacao$' ||'|'||
-'$ExLiquidacao$' ||'|'||
-'$CodEntidadeOrigemLiquidacao$' ||'|'||
-'$CodEntidadeEmpenho$' ||'|'||
-'$ExercicioEmpenho$' ||'|'||
-'$NrEmpenho$' ||'|'||
-'$ExEmpenho$' ||'|'||
-'$CodEntidadeOrigemEmpenho$' ||'|'
-FROM FROMOVC a 
-left join FROVEIC v on (v.IDFROTA = a.IDFROTA)
-join FROROTC r on (r.CODIGO = a.CODROTEIRO)
-where a.TIPO = 6
-order by a.SEQUENCIA desc """,
+                    {codEntidade} ||'|'||
+                    a.SEQUENCIA ||'|'||
+                    coalesce(v.CODIGO,'') ||'|'||
+                    coalesce(v.NUMTOMBAMENTO,'') ||'|'||
+                    '$CodProduto$' ||'|'||
+                    '$Nome$' ||'|'||
+                    '$NrCodigoMotorista$' ||'|'||
+                    '$VlUnitario$' ||'|'||
+                    substring(a.data from 9 for 2) ||'/'|| substring(a.data from 6 for 2) ||'/'|| substring(a.data from 1 for 4) ||'|'||
+                    '$NrLitrosAbastecimento$' ||'|'||
+                    '$VlAbastecimento$' ||'|'||
+                    '1' ||'|'||
+                    '$NrNotaFiscal$' ||'|'||
+                    coalesce(a.OBSERVACAO, '') ||'|'||
+                    '$CodFornecedor$' ||'|'||
+                    '$Cnpj$' ||'|'||
+                    '$CodPessoa$' ||'|'||
+                    '$CodLocal$' ||'|'||
+                    '$NrInterno$' ||'|'||
+                    1  ||'|'||
+                    '$CodEntidadeLiquidacao$' ||'|'||
+                    '$ExercicioLiquidacao$' ||'|'||
+                    '$NrLiquidacao$' ||'|'||
+                    '$ExLiquidacao$' ||'|'||
+                    '$CodEntidadeOrigemLiquidacao$' ||'|'||
+                    '$CodEntidadeEmpenho$' ||'|'||
+                    '$ExercicioEmpenho$' ||'|'||
+                    '$NrEmpenho$' ||'|'||
+                    '$ExEmpenho$' ||'|'||
+                    '$CodEntidadeOrigemEmpenho$' ||'|'
+                    FROM FROMOVC a 
+                    left join FROVEIC v on (v.IDFROTA = a.IDFROTA)
+                    join FROROTC r on (r.CODIGO = a.CODROTEIRO)
+                    where a.TIPO = 6
+                    order by a.SEQUENCIA desc """,
 
 'Acumulador' : f""" SELECT 
-{codEntidade} ||'|'||
-coalesce(v.CODIGO,'') ||'|'||
-coalesce(v.NUMTOMBAMENTO,'') ||'|'||
-substring(a.DATA from 9 for 2) ||'/'|| substring(a.DATA from 6 for 2) ||'/'|| substring(a.DATA from 1 for 4) ||' '||'00:00:' || lpad(substring(LPAD(a.SEQUENCIA,6,'0') from 6 for 1), 2, '0') ||'|'||
-2 ||'|'||  --2 - Abastecimento
-a.SEQUENCIA ||'|'||
-'$VlAcumulador$' ||'|'||
-'$TmpVlAcumulador$' ||'|'
-FROM FROMOVC a 
-left join FROVEIC v on (v.IDFROTA = a.IDFROTA)
-where a.TIPO = 6
-order by a.SEQUENCIA asc """
+                {codEntidade} ||'|'||
+                coalesce(v.CODIGO,'') ||'|'||
+                coalesce(v.NUMTOMBAMENTO,'') ||'|'||
+                substring(a.DATA from 9 for 2) ||'/'|| substring(a.DATA from 6 for 2) ||'/'|| substring(a.DATA from 1 for 4) ||' '||'00:00:' || lpad(substring(LPAD(a.SEQUENCIA,6,'0') from 6 for 1), 2, '0') ||'|'||
+                2 ||'|'||  --2 - Abastecimento
+                a.SEQUENCIA ||'|'||
+                '$VlAcumulador$' ||'|'||
+                '$TmpVlAcumulador$' ||'|'
+                FROM FROMOVC a 
+                left join FROVEIC v on (v.IDFROTA = a.IDFROTA)
+                where a.TIPO = 6
+                order by a.SEQUENCIA asc """,
+
+'ControleSimAm' : f""" SELECT distinct
+                    {codEntidade} ||'|'||
+                    coalesce(v.CODIGO,'9') ||'|'||
+                    '#seq#' ||'|'||
+                    case when (SELECT 2 FROM FROROTC r2 where r2.DESTINO = 'Roteiro Anual' and r2.OBSDECLARADA != '.' and r2.OBSDECLARADA != '' and r2.CODIGO = r.CODIGO ) = 2 then 2 else 1 end ||'|'||
+                    substring(r.DATARETORNO from 9 for 2) ||'/'|| substring(r.DATARETORNO from 6 for 2) ||'/'|| substring(r.DATARETORNO from 1 for 4) ||'|'||
+                    case when r.KMDECLARADA != 0 then r.KMDECLARADA
+                    when r.HORADECLARADA != 0 then r.HORADECLARADA else '' end ||'|'||
+                    r.OBSDECLARADA ||'|'||
+                    case when (SELECT 2 FROM FROROTC r2 where r2.DESTINO = 'Roteiro Anual' and r2.OBSDECLARADA != '.' and r2.OBSDECLARADA != '' and r2.CODIGO = r.CODIGO ) = 2 then 2 else 1 end ||'|'||
+                    '' ||'|'||
+                    coalesce(v.NUMTOMBAMENTO,'44') ||'|'||
+                    coalesce(r.KMSAIDA,'0') ||'|'||
+                    coalesce(r.KMRETORNO,'0') ||'|'
+                    FROM FROROTC r
+                    left join FROVEIC v on (v.IDFROTA = r.IDFROTA)
+                    left join FROMOVC ab on (ab.CODROTEIRO = r.CODIGO)
+                    where r.DESTINO = 'Roteiro Anual' and r.DATARETORNO < current_date
+                    order by r.DATARETORNO, v.NUMTOMBAMENTO """
+
 }

@@ -40,10 +40,12 @@ def criar():
                 dados_veiculo = str(result_1[0][1]).split('|')
 
                 CodProduto_Nome = dado[6].replace(':', '|').replace(' ','').strip()
+                if CodProduto_Nome == '':
+                    CodProduto_Nome = '1|Gasolina'
                 NrCodigoMotorista = dados_veiculo[0]
                 try:
                     VlUnitario = round(float(str(result_1[0][0]).split('|')[3].replace('.', '').replace(',', '.').replace('R$ ', '')) / float(str(result_1[0][0]).split('|')[2].replace('.', '').replace(',', '.').replace('R$ ', '')),4)  # valor unitario
-                except: VlUnitario = '$0,00$'
+                except: VlUnitario = '0,00'
                 NrLitrosAbastecimento = dado[2].replace(',', '.')
                 VlAbastecimento = dado[3].replace(',', '.')
                 NrNotaFiscal = dado[0]
@@ -56,7 +58,7 @@ def criar():
 
                 try:
                     if CodFornecedor == '0':
-                        CodFornecedor = '13'
+                        CodFornecedor = cfg['DEFAULT']['Fornecedor']
                         cur_2.execute(f""" select f.NUMCNPJPESQ from FINPESC f where codigo = {CodFornecedor}""")
                         result_2 = cur_2.fetchall()
                         Cnpj = result_2[0][0]
@@ -66,9 +68,8 @@ def criar():
                         result_2 = cur_2.fetchall()
                         Cnpj = result_2[0][0]
 
-                except: CodFornecedor = '13'
+                except: CodFornecedor = cfg['DEFAULT']['Fornecedor']
 
-                # arquivo.write(str(inf[0]).replace('$CodProduto$|$Nome$', CodProduto_Nome).replace('$NrCodigoMotorista$', NrCodigoMotorista).replace('$VlUnitario$', str(VlUnitario)).replace('$NrLitrosAbastecimento$', NrLitrosAbastecimento).replace('$VlAbastecimento$',VlAbastecimento).replace('$NrNotaFiscal$',NrNotaFiscal).replace('$CodFornecedor$', CodFornecedor).replace('$Cnpj$',Cnpj).replace('.',',')+'\n')
                 linha = (str(inf[0]).replace(
                                 '$CodProduto$|$Nome$', CodProduto_Nome).replace(
                                 '$NrCodigoMotorista$', NrCodigoMotorista).replace(
