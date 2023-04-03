@@ -28,8 +28,14 @@ def start():
             #Layout coluna dados --> posição 1= num nota fiscal      2 = km atual    3 = qtde litros    4 = valor    5 = cod fornecedor     6 = razão social fornecedor   7 = tipo combustivel
             print('Arquivo: ' + comando + ' iniciado em ' + time.strftime("%d/%m/%y %H:%M:%S"))
 
+            sequencia = 0
             for inf in result:
-                arquivo.write(inf[0] + '\n')
+                if comando == 'ControleSimAm':
+                    sequencia = sequencia + 1
+                    linha = str(inf[0]).replace('#seq#', str(sequencia))
+                    arquivo.write(linha + '\n')
+                else:
+                    arquivo.write(inf[0] + '\n')
 
             print('Arquivo: ' + comando + ' finalizado em ' + time.strftime("%d/%m/%y %H:%M:%S") + '\n')
 
