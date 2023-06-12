@@ -1,12 +1,21 @@
 import time
 import fdb
+import time
 import configparser
 import script
 import arquivoAbastecimentoAcumulador
 from bottle import get, post, route, run, debug, template, request, static_file, error
 
+
 cfg = configparser.ConfigParser()
 cfg.read('cfg.ini')
+
+def cached_time():
+    cached_time.counter += 1
+    return time.strftime('%H:%M:%S', time.gmtime(cached_time.counter))
+
+# Inicializa o contador com valor 0
+cached_time.counter = 0
 
 @route('/')
 def start():
